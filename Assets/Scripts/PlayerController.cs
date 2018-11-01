@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 spawnPoint;
     public AttackAndBlock attackScript;
     public GameObject enemy;
+    public GameController scoreController;
 
     #endregion
 
@@ -53,8 +54,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.name == "StabCol" && other.tag == enemy.transform.tag && !attackScript.isBlocking)
         {
-            Debug.Log("Player "+attackScript.whichPlayer+": has Died!");
-            transform.position = new Vector3(100, 10,0);
+            Debug.Log("Player " + attackScript.whichPlayer + ": has Died!");
+            transform.position = new Vector3(100, 10, 0);
+            if (attackScript.whichPlayer == 1)
+            {
+                scoreController.score.x++; Debug.Log("The score is: " + scoreController.score.x + " - " + scoreController.score.y);
+            }
+            if (attackScript.whichPlayer == 2)
+            {
+                scoreController.score.y++;Debug.Log("The score is: " + scoreController.score.x + " - " + scoreController.score.y);
+            }
+            
+
         }
         if (other.name == "StabCol" && other.tag == enemy.transform.tag && attackScript.isBlocking)
         {
